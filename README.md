@@ -12,16 +12,12 @@ A simple react journal site.
  npm install
  ```
  This will install the dependencies of the frontend and the backend
- - Then in /backend run
+ - Then in the main folder run
  ```
- node server
+ npm run dev
  ```
- This will start the backend server at port 5000
- - Now open a new window in the terminal and go the the main folder and run
- ```
- npm start
- ```
- This will start the frontend server at port 3000
+ This will start the backend server at port 5000 and the frontend server at port 3000 simultaneously.
+
  - Now the site can be accessed at localhost:3000
  
  ## local password feature
