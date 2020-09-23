@@ -18,7 +18,7 @@ function EntryList(props) {
         )}
       </div>
 
-      <div className="entry-list">
+      <div>
         {props.entries.map((entry) => {
           return (
             <Link to={`/entries/${entry._id}`}>

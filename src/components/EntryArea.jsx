@@ -7,10 +7,7 @@ import DeleteEntry from "./DeleteEntry";
 
 function EntryArea(props) {
   return (
-    <div
-      className="entry-area"
-      style={{ width: props.expanded ? "60%" : "69%" }}
-    >
+    <div className="entry-area">
       <Route exact path="/">
         <EntryForm
           reset={props.reset}

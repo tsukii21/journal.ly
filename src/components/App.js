@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
-import NavMenu from "./NavMenu";
 import EntryList from "./EntryList";
 import EntryArea from "./EntryArea";
 
-function App(props) {
-  const [expanded, setExpanded] = useState(false);
+function App() {
   const [entries, setEntries] = useState([]);
   const [newEntry, setEntry] = useState({
     title: "",
     content: "",
     date: new Date(),
   });
-
-  function expand() {
-    setExpanded((prevValue) => !prevValue);
-  }
 
   useEffect(() => {
     fetchEntries();
@@ -28,7 +22,6 @@ function App(props) {
       .slice()
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     setEntries(fetchedEntries);
-    console.log(fetchedEntries);
   };
 
   function resetForm() {
@@ -41,21 +34,18 @@ function App(props) {
 
   return (
     <Router>
-      <div className="row">
-        <NavMenu
-          expanded={expanded}
-          expand={expand}
-          reset={resetForm}
-          logout={props.logout}
-        />
-        <EntryList entries={entries} />
+      <div className="app-container">
+        {/* <div className="overlay">
+          <div class="left-overlay"></div>
+          <div class="right-overlay"></div>
+        </div> */}
         <EntryArea
           reset={resetForm}
           update={fetchEntries}
-          expanded={expanded}
           entry={newEntry}
           setEntry={setEntry}
         />
+        <EntryList entries={entries} />
       </div>
     </Router>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import autosize from "autosize";
 
 function EntryForm(props) {
   function handleTitleChange(event) {
@@ -33,16 +33,31 @@ function EntryForm(props) {
       date: props.entry.date,
     };
 
-    await axios
-      .post("http://localhost:5000/entries/add", entry)
-      .then((res) => console.log(res));
+    await axios.post("http://localhost:5000/entries/add", entry);
 
     props.update();
     props.reset();
   };
 
+  autosize(document.getElementById("ta"));
+
   return (
-    <form className="entry-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="entry-menu">
+        <button className="btn" type="submit">
+          <i className="im im-check-mark app-btn"></i>
+        </button>
+      </div>
+      <input
+        className="entry-field"
+        type="text"
+        name="title"
+        value={props.entry.title}
+        onChange={handleTitleChange}
+        placeholder="Title the day"
+        autoComplete="off"
+        required
+      />
       <DatePicker
         className="date-picker"
         selected={props.entry.date}
@@ -56,27 +71,16 @@ function EntryForm(props) {
         }
         dateFormat="MMMM d, yyyy"
       />
-      <input
-        className="entry-field"
-        type="text"
-        name="title"
-        value={props.entry.title}
-        onChange={handleTitleChange}
-        placeholder="Title"
-        autoComplete="off"
-        required
-      />
       <textarea
+        id="ta"
         className="entry-textarea"
         name="content"
         value={props.entry.content}
         onChange={handleContentChange}
-        placeholder="Start writing"
+        rows="1"
+        placeholder="So, what happened?"
         required
       />
-      <button className="btn entry-submit-btn" type="submit">
-        <SaveAltIcon fontSize="large" />
-      </button>
     </form>
   );
 }

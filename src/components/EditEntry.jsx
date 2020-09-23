@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import autosize from "autosize";
 
 function EditEntry({ id, update }) {
   const [isEdited, setEdited] = useState(false);
@@ -44,18 +44,34 @@ function EditEntry({ id, update }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post("http://localhost:5000/entries/update/" + id, entry)
-      .then((res) => console.log(res));
+    await axios.post("http://localhost:5000/entries/update/" + id, entry);
 
     update();
     setEdited(true);
   };
 
+  autosize(document.getElementById("ta"));
+
   return isEdited ? (
     <Redirect to={"/entries/" + id} />
   ) : (
-    <form className="entry-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="entry-menu">
+        <button className="btn" type="submit">
+          <i className="im im-check-mark app-btn"></i>
+        </button>
+      </div>
+
+      <input
+        className="entry-field"
+        type="text"
+        name="title"
+        value={entry.title}
+        onChange={handleTitleChange}
+        placeholder="Title"
+        autoComplete="off"
+        required
+      />
       <DatePicker
         className="date-picker"
         selected={new Date(entry.date)}
@@ -69,17 +85,8 @@ function EditEntry({ id, update }) {
         }
         dateFormat="MMMM d, yyyy"
       />
-      <input
-        className="entry-field"
-        type="text"
-        name="title"
-        value={entry.title}
-        onChange={handleTitleChange}
-        placeholder="Title"
-        autoComplete="off"
-        required
-      />
       <textarea
+        id="ta"
         className="entry-textarea"
         name="content"
         value={entry.content}
@@ -87,9 +94,6 @@ function EditEntry({ id, update }) {
         placeholder="Start writing"
         required
       />
-      <button className="btn entry-submit-btn" type="submit">
-        <SaveAltIcon fontSize="large" />
-      </button>
     </form>
   );
 }
