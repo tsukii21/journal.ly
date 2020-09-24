@@ -10,6 +10,7 @@ function EntryListItem(props) {
         <h2>{props.title}</h2>
       )}
       <p>{moment(props.date).format("MMMM D, YYYY")}</p>
+      {props.isSpecial && <span className="special-tag">SPECIAL</span>}
     </div>
   );
 }

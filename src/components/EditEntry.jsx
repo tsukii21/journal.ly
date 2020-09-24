@@ -11,6 +11,7 @@ function EditEntry({ id, update }) {
     title: "",
     content: "",
     date: new Date(),
+    isSpecial: false,
   });
 
   useEffect(() => {
@@ -42,6 +43,15 @@ function EditEntry({ id, update }) {
     });
   }
 
+  const toggleSpecial = () => {
+    setEntry((prevValue) => {
+      return {
+        ...prevValue,
+        isSpecial: !prevValue.isSpecial,
+      };
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios.post("http://localhost:5000/entries/update/" + id, entry);
@@ -57,6 +67,14 @@ function EditEntry({ id, update }) {
   ) : (
     <form onSubmit={handleSubmit}>
       <div className="entry-menu">
+        <button onClick={toggleSpecial} className="btn" type="button">
+          <i
+            style={{
+              color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
+            }}
+            className="im im-star special-btn"
+          ></i>
+        </button>
         <button className="btn" type="submit">
           <i className="im im-check-mark app-btn"></i>
         </button>

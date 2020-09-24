@@ -20,6 +20,14 @@ function Entry({ match }) {
     <div>
       <div className="entry-menu">
         <button className="btn">
+          <i
+            style={{
+              color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
+            }}
+            className="im im-star special-btn"
+          ></i>
+        </button>
+        <button className="btn">
           <Link to={"/edit/" + entry._id}>
             <i className="im im-pencil app-btn"></i>
           </Link>

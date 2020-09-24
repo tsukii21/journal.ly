@@ -23,6 +23,7 @@ const entrySchema = new Schema(
     title: { type: String, required: true },
     content: { type: String, required: true },
     date: { type: Date, required: true },
+    isSpecial: { type: Boolean, required: true },
   },
   {
     timestamps: true,
@@ -46,6 +47,7 @@ app.post("/entries/add", (req, res) => {
     title: req.body.title,
     content: req.body.content,
     date: Date.parse(req.body.date),
+    isSpecial: req.body.isSpecial,
   });
   newEntry
     .save()
@@ -71,7 +73,7 @@ app.post("/entries/update/:id", (req, res) => {
       entry.title = req.body.title;
       entry.content = req.body.content;
       entry.date = Date.parse(req.body.date);
-
+      entry.isSpecial = req.body.isSpecial;
       entry
         .save()
         .then(() => res.json("Entry updated!"))

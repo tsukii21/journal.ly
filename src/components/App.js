@@ -10,6 +10,7 @@ function App() {
     title: "",
     content: "",
     date: new Date(),
+    isSpecial: false,
   });
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
       title: "",
       content: "",
       date: new Date(),
+      isSpecial: false,
     });
   }
 

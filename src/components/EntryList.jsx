@@ -28,6 +28,7 @@ function EntryList(props) {
                 title={entry.title}
                 content={entry.content}
                 date={entry.date}
+                isSpecial={entry.isSpecial}
               />
             </Link>
           );

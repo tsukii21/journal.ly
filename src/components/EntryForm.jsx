@@ -25,12 +25,22 @@ function EntryForm(props) {
     });
   }
 
+  const toggleSpecial = () => {
+    props.setEntry((prevValue) => {
+      return {
+        ...prevValue,
+        isSpecial: !prevValue.isSpecial,
+      };
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const entry = {
       title: props.entry.title,
       content: props.entry.content,
       date: props.entry.date,
+      isSpecial: props.entry.isSpecial,
     };
 
     await axios.post("http://localhost:5000/entries/add", entry);
@@ -44,6 +54,16 @@ function EntryForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="entry-menu">
+        <button onClick={toggleSpecial} className="btn" type="button">
+          <i
+            style={{
+              color: props.entry.isSpecial
+                ? "yellow"
+                : "rgba(255, 255, 255, 0.3)",
+            }}
+            className="im im-star special-btn"
+          ></i>
+        </button>
         <button className="btn" type="submit">
           <i className="im im-check-mark app-btn"></i>
         </button>
