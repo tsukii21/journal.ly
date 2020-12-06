@@ -6,7 +6,9 @@ function EntryList(props) {
   return (
     <div className="entry-list-container">
       <div className="heading">
-        <h1>All entries</h1>
+        <h1>
+          journal<span style={{ color: "#1DB700" }}>.ly</span>
+        </h1>
         {props.entries.length > 0 ? (
           props.entries.length > 1 ? (
             <p>{props.entries.length} entries</p>
@@ -21,7 +23,7 @@ function EntryList(props) {
       <div>
         {props.entries.map((entry) => {
           return (
-            <Link to={`/entries/${entry._id}`}>
+            <Link key={entry._id} to={`/entries/${entry._id}`}>
               <EntryListItem
                 key={entry._id}
                 id={entry._id}

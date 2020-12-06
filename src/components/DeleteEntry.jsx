@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-function DeleteEntry({ id, update }) {
-  const [deleted, setDeleted] = useState(null);
+function DeleteEntry({ id, update, loggedUser }) {
+  const [deleted, setDeleted] = useState(false);
   const [notDeleted, setNotDeleted] = useState(false);
   const deleteItem = async () => {
     await axios.delete("http://localhost:5000/entries/" + id);
-    update();
+    await update(loggedUser._id);
     setDeleted(true);
   };
   const cancelDelete = () => {

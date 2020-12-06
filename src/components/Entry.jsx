@@ -19,29 +19,38 @@ function Entry({ match }) {
   return (
     <div>
       <div className="entry-menu">
-        <button className="btn">
-          <i
-            style={{
-              color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
-            }}
-            className="im im-star special-btn"
-          ></i>
-        </button>
-        <button className="btn">
-          <Link to={"/edit/" + entry._id}>
-            <i className="im im-pencil app-btn"></i>
+        <div className="entry-sub-menu">
+          <Link to="/settings">
+            <button className="btn" type="button">
+              <i className="im im-gear app-btn"></i>
+            </button>
           </Link>
-        </button>
-        <button className="btn">
-          <Link to={"/delete/" + entry._id}>
-            <i className="im im-x-mark app-btn"></i>
-          </Link>
-        </button>
-        <button className="btn">
-          <Link to="/">
-            <i className="im im-plus app-btn"></i>
-          </Link>
-        </button>
+        </div>
+        <div className="entry-sub-menu">
+          <button className="btn">
+            <i
+              style={{
+                color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
+              }}
+              className="im im-star special-btn"
+            ></i>
+          </button>
+          <button className="btn">
+            <Link to={"/edit/" + entry._id}>
+              <i className="im im-pencil app-btn"></i>
+            </Link>
+          </button>
+          <button className="btn">
+            <Link to={"/delete/" + entry._id}>
+              <i className="im im-x-mark app-btn"></i>
+            </Link>
+          </button>
+          <button className="btn">
+            <Link to="/">
+              <i className="im im-plus app-btn"></i>
+            </Link>
+          </button>
+        </div>
       </div>
       <h1 className="entry-title">{entry.title}</h1>
       <p className="entry-date">{moment(entry.date).format("MMMM D, YYYY")}</p>

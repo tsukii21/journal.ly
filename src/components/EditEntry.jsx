@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import autosize from "autosize";
 
 function EditEntry({ id, update }) {
@@ -56,7 +56,7 @@ function EditEntry({ id, update }) {
     event.preventDefault();
     await axios.post("http://localhost:5000/entries/update/" + id, entry);
 
-    update();
+    await update(entry.user_id);
     setEdited(true);
   };
 
@@ -67,17 +67,26 @@ function EditEntry({ id, update }) {
   ) : (
     <form onSubmit={handleSubmit}>
       <div className="entry-menu">
-        <button onClick={toggleSpecial} className="btn" type="button">
-          <i
-            style={{
-              color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
-            }}
-            className="im im-star special-btn"
-          ></i>
-        </button>
-        <button className="btn" type="submit">
-          <i className="im im-check-mark app-btn"></i>
-        </button>
+        <div className="entry-sub-menu">
+          <Link to="/settings">
+            <button className="btn" type="button">
+              <i className="im im-gear app-btn"></i>
+            </button>
+          </Link>
+        </div>
+        <div className="entry-sub-menu">
+          <button onClick={toggleSpecial} className="btn" type="button">
+            <i
+              style={{
+                color: entry.isSpecial ? "yellow" : "rgba(255, 255, 255, 0.3)",
+              }}
+              className="im im-star special-btn"
+            ></i>
+          </button>
+          <button className="btn" type="submit">
+            <i className="im im-check-mark app-btn"></i>
+          </button>
+        </div>
       </div>
 
       <input

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -36,16 +37,10 @@ function EntryForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const entry = {
-      title: props.entry.title,
-      content: props.entry.content,
-      date: props.entry.date,
-      isSpecial: props.entry.isSpecial,
-    };
 
-    await axios.post("http://localhost:5000/entries/add", entry);
+    await axios.post("http://localhost:5000/entries/add", props.entry);
 
-    props.update();
+    await props.update(props.entry.user_id);
     props.reset();
   };
 
@@ -54,19 +49,29 @@ function EntryForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="entry-menu">
-        <button onClick={toggleSpecial} className="btn" type="button">
-          <i
-            style={{
-              color: props.entry.isSpecial
-                ? "yellow"
-                : "rgba(255, 255, 255, 0.3)",
-            }}
-            className="im im-star special-btn"
-          ></i>
-        </button>
-        <button className="btn" type="submit">
-          <i className="im im-check-mark app-btn"></i>
-        </button>
+        <div className="entry-sub-menu">
+          <Link to="/settings">
+            <button className="btn" type="button">
+              <i className="im im-gear app-btn"></i>
+            </button>
+          </Link>
+        </div>
+        <div className="entry-sub-menu">
+          <button onClick={toggleSpecial} className="btn" type="button">
+            <i
+              style={{
+                color: props.entry.isSpecial
+                  ? "yellow"
+                  : "rgba(255, 255, 255, 0.3)",
+              }}
+              className="im im-star special-btn"
+            ></i>
+          </button>
+
+          <button className="btn" type="submit">
+            <i className="im im-check-mark app-btn"></i>
+          </button>
+        </div>
       </div>
       <input
         className="entry-field"

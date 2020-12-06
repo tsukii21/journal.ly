@@ -4,6 +4,7 @@ import EntryForm from "./EntryForm";
 import Entry from "./Entry";
 import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
+import Settings from "./Settings";
 
 function EntryArea(props) {
   return (
@@ -27,10 +28,17 @@ function EntryArea(props) {
         exact
         path={`/delete/:id`}
         render={({ match }) => (
-          <DeleteEntry update={props.update} id={match.params.id} />
+          <DeleteEntry
+            loggedUser={props.loggedUser}
+            update={props.update}
+            id={match.params.id}
+          />
         )}
       />
       <Route exact path="/entries/:id" component={Entry} />
+      <Route exact path="/settings">
+        <Settings logOut={props.logOut} loggedUser={props.loggedUser} />
+      </Route>
     </div>
   );
 }
