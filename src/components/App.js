@@ -33,7 +33,9 @@ function App() {
   };
 
   const fetchEntries = async (id) => {
-    const res = await axios.get(`http://localhost:5000/${id}/entries`);
+    const res = await axios.get(
+      `https://protected-retreat-04756.herokuapp.com/${id}/entries`
+    );
     const fetchedEntries = res.data
       .slice()
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

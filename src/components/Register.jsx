@@ -17,7 +17,7 @@ const Register = (props) => {
     e.preventDefault();
     setError("");
     await axios
-      .post("http://localhost:5000/users/add", newUser)
+      .post("https://protected-retreat-04756.herokuapp.com/users/add", newUser)
       .then((res) => {
         props.logUser(res.data);
       })

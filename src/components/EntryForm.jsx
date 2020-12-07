@@ -38,7 +38,10 @@ function EntryForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.post("http://localhost:5000/entries/add", props.entry);
+    await axios.post(
+      "https://protected-retreat-04756.herokuapp.com/entries/add",
+      props.entry
+    );
 
     await props.update(props.entry.user_id);
     props.reset();

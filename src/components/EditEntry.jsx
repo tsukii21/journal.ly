@@ -19,7 +19,9 @@ function EditEntry({ id, update }) {
   }, [id]);
 
   const fetchItem = async (id) => {
-    const res = await axios.get("http://localhost:5000/entries/" + id);
+    const res = await axios.get(
+      "https://protected-retreat-04756.herokuapp.com/entries/" + id
+    );
     setEntry(res.data);
   };
 
@@ -54,7 +56,10 @@ function EditEntry({ id, update }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post("http://localhost:5000/entries/update/" + id, entry);
+    await axios.post(
+      "https://protected-retreat-04756.herokuapp.com/entries/update/" + id,
+      entry
+    );
 
     await update(entry.user_id);
     setEdited(true);

@@ -26,6 +26,9 @@ const Settings = (props) => {
       >
         Log Out
       </button>
+      <p style={{ position: "absolute", bottom: "20px" }}>
+        made by tsukii webworks/Jaidev Das
+      </p>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Login = (props) => {
     e.preventDefault();
     setError("");
     await axios
-      .post("http://localhost:5000/users/verify", user)
+      .post("https://protected-retreat-04756.herokuapp.com/users/verify", user)
       .then((res) => {
         props.logUser(res.data);
       })

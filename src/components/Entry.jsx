@@ -12,7 +12,9 @@ function Entry({ match }) {
   }, [id]);
 
   const fetchItem = async (id) => {
-    const res = await axios.get("http://localhost:5000/entries/" + id);
+    const res = await axios.get(
+      "https://protected-retreat-04756.herokuapp.com/entries/" + id
+    );
     setEntry(res.data);
   };
 

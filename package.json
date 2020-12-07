@@ -5,7 +5,6 @@
   "dependencies": {
     "autosize": "^4.0.2",
     "axios": "^0.19.2",
-    "concurrently": "^5.2.0",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-datepicker": "^2.14.1",
@@ -17,8 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"cd backend && node server\" \"npm start\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

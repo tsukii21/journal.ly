@@ -6,7 +6,9 @@ function DeleteEntry({ id, update, loggedUser }) {
   const [deleted, setDeleted] = useState(false);
   const [notDeleted, setNotDeleted] = useState(false);
   const deleteItem = async () => {
-    await axios.delete("http://localhost:5000/entries/" + id);
+    await axios.delete(
+      "https://protected-retreat-04756.herokuapp.com/entries/" + id
+    );
     await update(loggedUser._id);
     setDeleted(true);
   };
