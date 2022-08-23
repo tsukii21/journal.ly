@@ -1,6 +1,6 @@
-import React from "react";
-import EntryList from "./EntryList";
-import EntryArea from "./EntryArea";
+import React from "react"
+import EntryList from "./EntryList"
+import EntryArea from "./EntryArea"
 
 const Journal = (props) => {
   return (
@@ -13,9 +13,9 @@ const Journal = (props) => {
         logOut={props.logOut}
         loggedUser={props.loggedUser}
       />
-      <EntryList entries={props.entries} />
+      <EntryList entries={props.entries} loading={props.entriesLoading} />
     </div>
-  );
-};
+  )
+}
 
-export default Journal;
+export default Journal

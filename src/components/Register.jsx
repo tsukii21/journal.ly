@@ -1,30 +1,33 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react"
+import axios from "axios"
 
 const Register = (props) => {
-  const [newUser, setNewUser] = useState({ name: "", email: "", password: "" });
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
+  const [newUser, setNewUser] = useState({ name: "", email: "", password: "" })
+  const [error, setError] = useState("")
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setNewUser((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
-      };
-    });
-  };
+      }
+    })
+  }
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+    e.preventDefault()
+    setError("")
+    setLoading(true)
     await axios
       .post("https://protected-retreat-04756.herokuapp.com/users/add", newUser)
       .then((res) => {
-        props.logUser(res.data);
+        props.logUser(res.data)
       })
       .catch((err) => {
-        setError("email exists already");
-      });
-  };
+        setError("email exists already")
+      })
+      .finally(() => setLoading(false))
+  }
   return (
     <div style={{ opacity: props.toggleState ? 0 : 1 }} className="auth-panel">
       <form onSubmit={handleSubmit} className="auth-form" autoComplete="off">
@@ -54,8 +57,12 @@ const Register = (props) => {
           onChange={handleChange}
           required
         />
-        <button type="submit" className="btn app-btn">
-          <i className="im im-check-mark"></i>
+        <button disabled={loading} type="submit" className="btn app-btn">
+          {loading ? (
+            <i className="im im-spinner rotating" />
+          ) : (
+            <i className="im im-check-mark" />
+          )}
         </button>
         <div className="auth-msg">
           <p>{error}</p>
@@ -75,7 +82,7 @@ const Register = (props) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

@@ -1,29 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import autosize from "autosize";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import axios from "axios"
+import autosize from "autosize"
 
 function EntryForm(props) {
+  const [loading, setLoading] = useState(false)
   function handleTitleChange(event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     props.setEntry((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
-      };
-    });
+      }
+    })
   }
 
   function handleContentChange(event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     props.setEntry((prevValue) => {
       return {
         ...prevValue,
         [name]: value,
-      };
-    });
+      }
+    })
   }
 
   const toggleSpecial = () => {
@@ -31,23 +32,25 @@ function EntryForm(props) {
       return {
         ...prevValue,
         isSpecial: !prevValue.isSpecial,
-      };
-    });
-  };
+      }
+    })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
+    setLoading(true)
 
     await axios.post(
       "https://protected-retreat-04756.herokuapp.com/entries/add",
       props.entry
-    );
+    )
 
-    await props.update(props.entry.user_id);
-    props.reset();
-  };
+    await props.update(props.entry.user_id)
+    setLoading(false)
+    props.reset()
+  }
 
-  autosize(document.getElementById("ta"));
+  autosize(document.getElementById("ta"))
 
   return (
     <form onSubmit={handleSubmit}>
@@ -71,8 +74,12 @@ function EntryForm(props) {
             ></i>
           </button>
 
-          <button className="btn" type="submit">
-            <i className="im im-check-mark app-btn"></i>
+          <button disabled={loading} className="btn" type="submit">
+            {loading ? (
+              <i className="im im-spinner rotating app-btn" />
+            ) : (
+              <i className="im im-check-mark app-btn" />
+            )}
           </button>
         </div>
       </div>
@@ -94,7 +101,7 @@ function EntryForm(props) {
             return {
               ...prevValue,
               date: date,
-            };
+            }
           })
         }
         dateFormat="MMMM d, yyyy"
@@ -110,7 +117,7 @@ function EntryForm(props) {
         required
       />
     </form>
-  );
+  )
 }
 
-export default EntryForm;
+export default EntryForm
